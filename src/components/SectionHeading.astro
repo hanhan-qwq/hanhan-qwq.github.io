@@ -1,0 +1,20 @@
+---
+export interface Props {
+  title: string;
+  href?: string;
+}
+
+const { title, href } = Astro.props;
+---
+
+<div class="flex items-center justify-between mb-6">
+  <h2 class="font-display text-xl md:text-2xl">{title}</h2>
+  {href && (
+    <a
+      href={href}
+      class="pixel-chip text-marker-teal border-marker-teal"
+    >
+      查看全部
+    </a>
+  )}
+</div>

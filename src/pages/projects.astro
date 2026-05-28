@@ -1,0 +1,61 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+---
+
+<BaseLayout title="项目 — 像素复古博客">
+  <section class="mb-8">
+    <h1 class="font-display text-2xl md:text-3xl mb-2">项目</h1>
+    <p class="prose-body text-sm mb-6">开源项目与个人作品。</p>
+
+    <!-- TOC -->
+    <div class="flex flex-wrap gap-2 mb-8">
+      <a href="#open-source" class="pixel-chip bg-marker-red/20 border-marker-red">开源项目</a>
+      <a href="#programs" class="pixel-chip text-paper-text">小程序</a>
+      <a href="#learnings" class="pixel-chip text-paper-text">学习中</a>
+      <a href="#theme" class="pixel-chip text-paper-text">主题</a>
+    </div>
+  </section>
+
+  <section id="open-source" class="mb-10">
+    <h2 class="font-display text-lg mb-4">开源项目</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <ProjectCard
+        title="pixel-retro-blog"
+        description="这个博客本身 —— 使用 Astro 构建，融合像素复古与手绘涂鸦风格的个人博客。"
+        role="Creator"
+        stack={["Astro", "Tailwind", "TypeScript"]}
+        repoUrl="https://github.com/user/pixel-retro-blog"
+      />
+      <ProjectCard
+        title="fusion-pixel-font"
+        description="TakWolf 的像素字体项目，为中文像素风格提供优雅的字体选择。"
+        role="Contributor"
+        stack={["Font", "Python"]}
+        repoUrl="https://github.com/TakWolf/fusion-pixel-font"
+        demoUrl="https://takwolf.com/fusion-pixel-font"
+      />
+    </div>
+  </section>
+
+  <section id="programs" class="mb-10">
+    <h2 class="font-display text-lg mb-4">小程序</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <ProjectCard
+        title="Pixel CLI Tool"
+        description="一个小巧的命令行工具，用于生成像素风格的 ASCII 艺术。"
+        stack={["Rust", "CLI"]}
+        repoUrl="https://github.com/user/pixel-cli"
+      />
+    </div>
+  </section>
+
+  <section id="learnings" class="mb-10">
+    <h2 class="font-display text-lg mb-4">学习中</h2>
+    <div class="doodle-sticker bg-surface p-5">
+      <p class="prose-body text-sm">
+        正在学习 Rust 和系统编程。这些学习项目会在完善后移至 Open Source 区域。
+      </p>
+    </div>
+  </section>
+</BaseLayout>

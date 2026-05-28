@@ -1,0 +1,42 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  date: string;
+  status: string;
+  tags: string[];
+  href: string;
+}
+
+const { title, description, date, status, tags, href } = Astro.props;
+
+const statusColors: Record<string, string> = {
+  seed: "bg-chalk-muted/30",
+  draft: "bg-marker-yellow/50",
+  "整理中": "bg-marker-teal/40",
+  "已整理": "bg-marker-teal/60",
+  evergreen: "bg-marker-red/30",
+};
+---
+
+<div class="doodle-sticker bg-surface p-5 flex flex-col justify-between">
+  <div>
+    <h3 class="text-lg font-bold font-display text-paper-text mb-2 leading-relaxed">
+      <a href={href} class="wave-link flex items-baseline gap-x-2">
+        {title}
+      </a>
+    </h3>
+    <p class="prose-body text-xs leading-relaxed mb-3">{description}</p>
+  </div>
+  <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs text-paper-muted mt-auto">
+    <span class="font-display text-[10px]">{date}</span>
+    <span class={`pixel-chip px-2 py-0.5 text-[10px] ${statusColors[status] || "bg-paper/80"} text-paper-text`}>
+      {status}
+    </span>
+    {tags.map((tag) => (
+      <a href={`/notes?tag=${tag}`} class="pixel-chip px-2 py-0.5 text-[10px] bg-marker-yellow/30 text-paper-text">
+        {tag}
+      </a>
+    ))}
+  </div>
+</div>

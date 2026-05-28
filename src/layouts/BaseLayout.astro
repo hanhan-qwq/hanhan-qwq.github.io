@@ -1,0 +1,117 @@
+---
+import "../styles/global.css";
+
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Pixelify+Sans:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <header class="max-w-5xl mx-auto w-full px-4 pt-6 mb-6">
+      <div class="pixel-frame relative flex w-full items-baseline justify-between px-4 py-4 sm:items-center sm:px-6 sm:py-5 bg-surface">
+        <a
+          href="/"
+          class="font-display text-[0.95rem] leading-8 whitespace-nowrap uppercase tracking-[0.18em] wave-link"
+        >
+          首页
+        </a>
+        <nav class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-4">
+          <ul class="flex flex-wrap justify-center gap-2">
+            {
+              [
+                { href: "/blog", label: "文章" },
+                { href: "/links", label: "友链" },
+                { href: "/search", label: "搜索" },
+                { href: "/about", label: "关于" },
+              ].map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    class="pixel-chip h-9 px-3 flex items-center justify-center text-xs sm:text-sm whitespace-nowrap"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+            <!-- Theme toggle -->
+            <li>
+              <button
+                id="theme-toggle"
+                class="pixel-chip h-9 px-3 flex items-center justify-center text-xs sm:text-sm whitespace-nowrap"
+                aria-label="Toggle dark mode"
+              >
+                🌙
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="flex-1 max-w-5xl mx-auto w-full px-4 pb-16">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-paper-text text-paper/80 py-12 px-4 border-t-2 border-paper-text">
+      <div class="max-w-5xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <span class="font-display text-lg">首页</span>
+            <p class="font-display text-xs mt-4 text-paper/50">
+              内容优先的像素复古博客
+            </p>
+          </div>
+          <div>
+            <h4 class="font-display text-sm mb-4">导航</h4>
+            <ul class="space-y-2 font-display text-xs text-paper/50">
+              <li><a href="/blog" class="wave-link">文章</a></li>
+              <li><a href="/links" class="wave-link">友链</a></li>
+              <li><a href="/search" class="wave-link">搜索</a></li>
+              <li><a href="/about" class="wave-link">关于</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-8 pt-8 border-t border-paper/20 text-center font-display text-[10px] text-paper/30">
+          使用 Astro 构建
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Theme toggle
+      const toggle = document.getElementById("theme-toggle");
+      if (toggle) {
+        const isDark = localStorage.getItem("theme") === "dark" ||
+          (!localStorage.getItem("theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        if (isDark) {
+          document.documentElement.classList.add("dark");
+          toggle.textContent = "☀️";
+        }
+        toggle.addEventListener("click", () => {
+          document.documentElement.classList.toggle("dark");
+          const nowDark = document.documentElement.classList.contains("dark");
+          localStorage.setItem("theme", nowDark ? "dark" : "light");
+          toggle.textContent = nowDark ? "☀️" : "🌙";
+        });
+      }
+    </script>
+  </body>
+</html>

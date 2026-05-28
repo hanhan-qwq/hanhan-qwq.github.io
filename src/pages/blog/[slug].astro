@@ -1,0 +1,46 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<BaseLayout title={`${post.data.title} — 像素复古博客`}>
+  <article class="max-w-3xl mx-auto">
+    <!-- Back nav -->
+    <a href="/blog" class="font-display text-xs text-paper-muted wave-link mb-6 inline-block">
+      &larr; 返回文章
+    </a>
+
+    <!-- Metadata -->
+    <header class="mb-8">
+      <h1 class="font-display text-2xl md:text-3xl leading-tight mb-4">{post.data.title}</h1>
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-display text-paper-muted">
+        <span>{post.data.date.toISOString().slice(0, 10)}</span>
+        {
+          post.data.tags.length > 0 && (
+            <div class="flex gap-1.5">
+              {post.data.tags.map((tag: string) => (
+                <span class="pixel-chip px-2 py-0.5 text-[10px] bg-marker-yellow/30 text-paper-text">{tag}</span>
+              ))}
+            </div>
+          )
+        }
+      </div>
+    </header>
+
+    <!-- Article body -->
+    <div class="prose dark:prose-invert max-w-none">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

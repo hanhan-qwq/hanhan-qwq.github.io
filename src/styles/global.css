@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --shadow: #4ecdc4;
+  }
+
+  .dark {
+    --shadow: #8BE4A0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-prose text-paper-text bg-paper;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .dark body {
+    @apply bg-chalkboard text-chalk-text;
+  }
+}
+
+@layer components {
+  .pixel-frame {
+    @apply rounded-none border-2 border-solid border-paper-text shadow-[4px_4px_0_var(--shadow)];
+  }
+
+  .dark .pixel-frame {
+    @apply border-chalk-border;
+  }
+
+  .doodle-sticker {
+    @apply rounded-sm border-2 border-dashed border-paper-text shadow-[3px_3px_0px_#4ecdc4]
+           transition-all duration-150 ease-in-out;
+  }
+
+  .dark .doodle-sticker {
+    @apply border-chalk-border shadow-[3px_3px_0px_var(--shadow)];
+  }
+
+  .doodle-sticker:hover {
+    @apply translate-x-[1px] translate-y-[1px] rotate-1 shadow-[4px_4px_0px_var(--shadow)];
+  }
+
+  .doodle-sticker:active {
+    @apply translate-x-[2px] translate-y-[2px] shadow-none;
+  }
+
+  .pixel-button {
+    @apply rounded-none border-2 border-solid border-paper-text
+           shadow-[3px_3px_0_#ff006e]
+           font-display font-semibold text-xs px-4 py-2
+           transition-transform duration-150
+           inline-flex items-center justify-center;
+  }
+
+  .dark .pixel-button {
+    @apply border-chalk-border shadow-[3px_3px_0_var(--shadow)];
+  }
+
+  .pixel-button:hover {
+    @apply -translate-y-0.5 translate-x-0.5;
+  }
+
+  .pixel-button:active {
+    @apply translate-y-0 translate-x-0 shadow-none;
+  }
+
+  .pixel-chip {
+    @apply px-2 py-0.5 text-[10px] rounded-sm border-2 border-dashed border-paper-text
+           font-display transition-all duration-150
+           inline-flex items-center gap-1;
+  }
+
+  .dark .pixel-chip {
+    @apply border-chalk-border;
+  }
+
+  .pixel-chip:hover {
+    @apply rotate-1 translate-x-[0.5px];
+  }
+
+  .wave-link {
+    @apply hover:underline hover:decoration-wavy underline-offset-4 decoration-2;
+  }
+
+  .prose-body {
+    @apply font-prose text-sm md:text-base leading-relaxed text-paper-muted;
+  }
+
+  .dark .prose-body {
+    @apply text-chalk-muted;
+  }
+
+  .prose :where(h5):not(:where([class~="not-prose"] *)) {
+    color: var(--tw-prose-headings);
+    font-weight: 600;
+    font-size: 1em;
+    margin-top: 1.25em;
+    margin-bottom: 0.5em;
+  }
+
+  .prose :where(h6):not(:where([class~="not-prose"] *)) {
+    color: var(--tw-prose-headings);
+    font-weight: 600;
+    font-size: 0.9em;
+    margin-top: 1.25em;
+    margin-bottom: 0.5em;
+  }
+}
+
+@layer utilities {
+  .bg-surface {
+    @apply bg-paper-card;
+  }
+
+  .dark .bg-surface {
+    @apply bg-chalk-card;
+  }
+}

@@ -1,0 +1,30 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  date: string;
+  tags: string[];
+  href: string;
+}
+
+const { title, description, date, tags, href } = Astro.props;
+---
+
+<div class="pixel-frame p-5 md:p-6 bg-surface hover:-translate-y-0.5 transition-all flex flex-col justify-between">
+  <div>
+    <h3 class="text-lg font-bold font-display text-paper-text mb-2 leading-relaxed">
+      <a href={href} class="wave-link flex items-baseline gap-x-2">
+        {title}
+      </a>
+    </h3>
+    <p class="prose-body text-xs leading-relaxed mb-3">{description}</p>
+  </div>
+  <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs text-paper-muted mt-auto">
+    <span class="font-display text-[10px]">{date}</span>
+    {tags.map((tag) => (
+      <a href={`/blog?tag=${tag}`} class="pixel-chip px-2 py-0.5 text-[10px] bg-marker-yellow/50 text-paper-text">
+        {tag}
+      </a>
+    ))}
+  </div>
+</div>

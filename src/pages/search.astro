@@ -1,0 +1,92 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const posts = await getCollection("blog");
+const searchData = posts.map((p) => ({
+  title: p.data.title,
+  description: p.data.description || "",
+  date: p.data.date.toISOString().slice(0, 10),
+  tags: p.data.tags,
+  slug: p.slug,
+}));
+---
+
+<BaseLayout title="搜索 — 像素复古博客">
+  <section class="mb-8 max-w-2xl mx-auto">
+    <h1 class="font-display text-2xl md:text-3xl mb-2">搜索</h1>
+    <p class="prose-body text-sm mb-6">搜索文章标题、描述和标签。</p>
+
+    <!-- Search Input -->
+    <div class="pixel-frame bg-surface p-5 mb-6">
+      <input
+        type="text"
+        id="search-input"
+        placeholder="输入关键词..."
+        class="w-full rounded-sm border-2 border-dashed border-paper-text bg-surface font-display text-sm px-4 py-3
+               focus:outline-none focus:border-marker-teal transition-all"
+      />
+    </div>
+
+    <!-- Results -->
+    <div id="search-results" class="space-y-4"></div>
+
+    <!-- Empty State -->
+    <div id="search-empty" class="text-center py-12">
+      <div class="font-display text-4xl text-paper-muted/30 mb-4">[_]</div>
+      <p class="font-display text-sm text-paper-muted">输入关键词开始搜索</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<script define:vars={{ searchData }}>
+  const input = document.getElementById("search-input");
+  const results = document.getElementById("search-results");
+  const empty = document.getElementById("search-empty");
+
+  function renderResults(items) {
+    results.innerHTML = "";
+    if (items.length === 0) {
+      empty.classList.remove("hidden");
+      return;
+    }
+    empty.classList.add("hidden");
+    results.innerHTML = items
+      .map(
+        (item) => `
+        <a href="/blog/${item.slug}" class="pixel-frame bg-surface p-5 block hover:-translate-y-0.5 transition-all">
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <h3 class="font-display font-bold text-sm mb-1">${item.title}</h3>
+              <p class="prose-body text-xs">${item.description}</p>
+            </div>
+            <span class="font-display text-[10px] text-paper-muted whitespace-nowrap">${item.date}</span>
+          </div>
+          ${
+            item.tags.length > 0
+              ? '<div class="flex gap-1.5 mt-2">' + item.tags.map(function(t) { return '<span class="pixel-chip text-[10px] bg-marker-yellow/30 text-paper-text">' + t + '</span>'; }).join("") + '</div>'
+              : ""
+          }
+        </a>
+      `
+      )
+      .join("");
+  }
+
+  function doSearch() {
+    var query = input.value.trim().toLowerCase();
+    if (!query) {
+      results.innerHTML = "";
+      empty.classList.remove("hidden");
+      return;
+    }
+    var filtered = searchData.filter(function(item) {
+      return item.title.toLowerCase().indexOf(query) !== -1 ||
+        item.description.toLowerCase().indexOf(query) !== -1 ||
+        item.tags.some(function(t) { return t.toLowerCase().indexOf(query) !== -1; });
+    });
+    renderResults(filtered);
+  }
+
+  input.addEventListener("input", doSearch);
+</script>

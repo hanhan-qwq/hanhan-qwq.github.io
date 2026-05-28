@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="关于 — 像素复古博客">
+  <section class="mb-8">
+    <h1 class="font-display text-2xl md:text-3xl mb-2">关于</h1>
+    <p class="prose-body text-sm mb-6">关于我和这个博客。</p>
+  </section>
+
+  <!-- Profile -->
+  <section id="profile" class="pixel-frame bg-surface p-5 md:p-6 mb-8">
+    <h2 class="font-display text-lg mb-4">个人档案</h2>
+    <img src="/avatar.jpg" alt="头像" class="w-20 h-20 rounded-sm object-cover" />
+  </section>
+
+  <!-- Hobbies -->
+  <section id="hobbies" class="pixel-frame bg-surface p-5 md:p-6 mb-8">
+    <h2 class="font-display text-lg mb-4">爱好</h2>
+    <div class="flex flex-wrap gap-2">
+      {
+        ["玩游戏"].map(
+          (h) => <span class="doodle-sticker bg-surface px-3 py-1 font-display text-xs">{h}</span>
+        )
+      }
+    </div>
+  </section>
+
+
+</BaseLayout>

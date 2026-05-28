@@ -1,0 +1,55 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import BlogCard from "../components/BlogCard.astro";
+
+const posts = await getCollection("blog");
+
+---
+
+<BaseLayout title="首页 — 像素复古博客" description="一个内容优先，像素复古风格的个人博客。">
+  <!-- Hero -->
+  <section class="pixel-frame p-5 md:p-6 bg-surface grid gap-6 md:grid-cols-[1.3fr_.9fr] md:items-center relative mb-12">
+    <div class="absolute -top-3 left-4 bg-marker-yellow/80 px-4 py-1 text-[10px] font-display border border-solid border-paper-text rotate-[-2deg] select-none shadow-[2px_2px_0px_#2c2c2c] rounded-none">
+      &#x2605; Ciallo～
+    </div>
+
+    <div class="pt-4">
+      <h1 class="font-display text-2xl sm:text-4xl leading-tight text-paper-text">
+        你好，欢迎来到我的博客
+      </h1>
+      <p class="mt-4 text-sm leading-relaxed prose-body">
+        一个平平无奇的大学生。
+      </p>
+      <div class="mt-6 flex gap-4">
+        <a href="/blog" class="pixel-button text-paper-text">
+          阅读文章
+        </a>
+        <a href="/about" class="pixel-button text-paper-text">
+          关于我
+        </a>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-center">
+      <img src="/avatar.jpg" alt="头像" class="w-32 h-32 md:w-40 md:h-40 rounded-sm object-cover" />
+    </div>
+  </section>
+
+  <!-- Latest Blog -->
+  <section class="mb-12">
+    <SectionHeading title="最新文章" href="/blog" />
+    <div class="grid grid-cols-1 gap-6">
+      {posts.map((post) => (
+        <BlogCard
+          title={post.data.title}
+          description={post.data.description || ""}
+          date={post.data.date.toISOString().slice(0, 10)}
+          tags={post.data.tags}
+          href={`/blog/${post.slug}`}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

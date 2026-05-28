@@ -1,0 +1,68 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const contacts = [
+  {
+    label: "Email",
+    handle: "hello@example.com",
+    reveal: "always",
+    note: "欢迎技术讨论和合作交流",
+  },
+  {
+    label: "GitHub",
+    handle: "@user",
+    reveal: "always",
+    note: "开源项目和代码在这里",
+  },
+  {
+    label: "Twitter / X",
+    handle: "@user",
+    reveal: "always",
+    note: "日常碎碎念",
+  },
+];
+---
+
+<BaseLayout title="联系 — 像素复古博客">
+  <section class="mb-8 max-w-2xl mx-auto">
+    <h1 class="font-display text-2xl md:text-3xl mb-2">联系我</h1>
+    <p class="prose-body text-sm mb-6">想联系我？这里是最佳方式。</p>
+
+    <!-- Contact Cards -->
+    <div class="space-y-4 mb-10">
+      {contacts.map((c) => (
+        <div class="pixel-frame bg-surface p-5 hover:-translate-y-0.5 transition-all">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h3 class="font-display text-sm mb-1">{c.label}</h3>
+              <p class="font-display text-xs text-marker-teal">{c.handle}</p>
+            </div>
+            <span class="pixel-chip text-[10px] bg-marker-yellow/30 text-paper-text">
+              {c.reveal}
+            </span>
+          </div>
+          <p class="prose-body text-xs mt-2">{c.note}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Rules -->
+    <div class="doodle-sticker bg-surface p-5">
+      <h2 class="font-display text-lg mb-3">添加前请注意</h2>
+      <ul class="space-y-2 font-display text-[10px] text-paper-muted">
+        <li class="flex gap-2">
+          <span class="text-marker-red">1.</span>
+          请备注来源和添加原因
+        </li>
+        <li class="flex gap-2">
+          <span class="text-marker-red">2.</span>
+          技术讨论、合作交流欢迎
+        </li>
+        <li class="flex gap-2">
+          <span class="text-marker-red">3.</span>
+          不欢迎垃圾信息和广告
+        </li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

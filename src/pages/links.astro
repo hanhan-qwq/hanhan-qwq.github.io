@@ -1,0 +1,79 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const links = [
+  {
+    title: "Astro 官方文档",
+    alias: "Astro Docs",
+    description: "最好的 Astro 学习资源。",
+    status: "active",
+    url: "https://astro.build",
+    date: "2024-01-01",
+  },
+  {
+    title: "Tailwind CSS",
+    alias: "Tailwind",
+    description: "实用优先的 CSS 框架。",
+    status: "active",
+    url: "https://tailwindcss.com",
+    date: "2024-01-01",
+  },
+  {
+    title: "Fusion Pixel Font",
+    alias: "像素字体",
+    description: "精美的手工像素中文字体。",
+    status: "active",
+    url: "https://github.com/TakWolf/fusion-pixel-font",
+    date: "2025-06-01",
+  },
+];
+---
+
+<BaseLayout title="友链 — 像素复古博客">
+  <section class="mb-8">
+    <h1 class="font-display text-2xl md:text-3xl mb-2">友链</h1>
+    <p class="prose-body text-sm mb-6">
+      推荐的好工具、好站点和好朋友。欢迎交换友链。
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {links.map((link) => (
+        <div class="pixel-frame p-5 bg-surface hover:-translate-y-0.5 transition-all">
+          <div class="flex items-start justify-between mb-2">
+            <div>
+              <h3 class="font-display font-bold text-sm">
+                <a href={link.url} target="_blank" rel="noopener" class="wave-link">
+                  {link.title}
+                </a>
+              </h3>
+              {link.alias && (
+                <p class="font-display text-[10px] text-marker-teal mt-0.5">{link.alias}</p>
+              )}
+            </div>
+            <span class="pixel-chip px-2 py-0.5 text-[10px] bg-marker-teal/30 text-paper-text">
+              {link.status}
+            </span>
+          </div>
+          <p class="prose-body text-xs mb-3">{link.description}</p>
+          <div class="font-display text-[10px] text-paper-muted">
+            <span>{link.date}</span>
+            <span class="ml-2">
+              <a href={link.url} target="_blank" rel="noopener" class="wave-link text-marker-red">
+                [访问]
+              </a>
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Apply section -->
+    <div class="doodle-sticker bg-surface p-5 mt-8 text-center">
+      <p class="font-display text-sm mb-2">想交换友链？</p>
+      <p class="prose-body text-xs mb-3">
+        请先添加本站链接，然后在评论区或通过联系方式告诉我。
+      </p>
+      <span class="pixel-chip bg-marker-yellow/50 text-paper-text">申请友链</span>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import NoteCard from "../../components/NoteCard.astro";
+
+const notes = [
+  {
+    title: "Astro 学习笔记",
+    description: "Astro 框架的核心概念，包括 Islands Architecture、Content Collections、View Transitions 等。",
+    date: "2026-05-22",
+    status: "整理中",
+    tags: ["astro", "前端"],
+    href: "/notes/astro-notes",
+  },
+  {
+    title: "Tailwind CSS 技巧集",
+    description: "日常使用 Tailwind 的实用技巧和最佳实践，包括自定义配置、插件使用等。",
+    date: "2026-05-27",
+    status: "seed",
+    tags: ["tailwind", "css"],
+    href: "/notes/tailwind-tips",
+  },
+  {
+    title: "Git 工作流随笔",
+    description: "团队协作中的 Git 分支策略和 commit 规范思考。",
+    date: "2026-04-15",
+    status: "evergreen",
+    tags: ["git", "协作"],
+    href: "/notes/git-workflow",
+  },
+];
+---
+
+<BaseLayout title="笔记 — 像素复古博客">
+  <section class="mb-8">
+    <h1 class="font-display text-2xl md:text-3xl mb-2">笔记</h1>
+    <p class="prose-body text-sm mb-4">
+      这里是第一手的思考记录和知识碎片，持续生长中。笔记的状态从 seed（种子）
+      到 evergreen（常青），代表想法的成熟度。
+    </p>
+
+    <!-- Status legend -->
+    <div class="flex flex-wrap gap-2 mb-8">
+      <span class="pixel-chip bg-chalk-muted/30 text-paper-text text-[10px]">seed</span>
+      <span class="pixel-chip bg-marker-yellow/50 text-paper-text text-[10px]">draft</span>
+      <span class="pixel-chip bg-marker-teal/40 text-paper-text text-[10px]">整理中</span>
+      <span class="pixel-chip bg-marker-teal/60 text-paper-text text-[10px]">已整理</span>
+      <span class="pixel-chip bg-marker-red/30 text-paper-text text-[10px]">evergreen</span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {notes.map((note) => <NoteCard {...note} />)}
+    </div>
+  </section>
+</BaseLayout>

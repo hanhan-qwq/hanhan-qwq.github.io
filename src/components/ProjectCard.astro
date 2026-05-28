@@ -1,0 +1,37 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  role?: string;
+  stack?: string[];
+  repoUrl?: string;
+  demoUrl?: string;
+}
+
+const { title, description, role, stack, repoUrl, demoUrl } = Astro.props;
+---
+
+<div class="pixel-frame p-5 bg-surface hover:-translate-y-0.5 transition-all">
+  <h3 class="font-display font-bold text-base mb-2">{title}</h3>
+  {role && <p class="font-display text-[10px] text-marker-teal mb-2">{role}</p>}
+  <p class="prose-body text-xs mb-3">{description}</p>
+  {stack && stack.length > 0 && (
+    <div class="flex flex-wrap gap-1.5 mb-3">
+      {stack.map((s) => (
+        <span class="pixel-chip px-2 py-0.5 text-[10px] bg-paper/80 text-paper-text">{s}</span>
+      ))}
+    </div>
+  )}
+  <div class="flex gap-3 mt-auto">
+    {repoUrl && (
+      <a href={repoUrl} target="_blank" rel="noopener" class="font-display text-[10px] text-paper-muted wave-link">
+        [source]
+      </a>
+    )}
+    {demoUrl && (
+      <a href={demoUrl} target="_blank" rel="noopener" class="font-display text-[10px] text-marker-red wave-link">
+        [demo]
+      </a>
+    )}
+  </div>
+</div>
