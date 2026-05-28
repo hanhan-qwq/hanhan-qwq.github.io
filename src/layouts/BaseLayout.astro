@@ -16,6 +16,11 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description || "hanhan的BLOG"} />
+    <meta property="og:image" content="https://hanhan-qwq.github.io/avatar.jpg" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
     <link rel="icon" href="/avatar.jpg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
