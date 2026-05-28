@@ -16,6 +16,7 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
+    <link rel="icon" href="/avatar.jpg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Pixelify+Sans:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet" />
@@ -28,7 +29,7 @@ const { title, description } = Astro.props;
           href="/"
           class="font-display text-[0.95rem] leading-8 whitespace-nowrap uppercase tracking-[0.18em] wave-link"
         >
-          首页
+          hanhan的BLOG
         </a>
         <nav class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-4">
           <ul class="flex flex-wrap justify-center gap-2">
@@ -74,7 +75,7 @@ const { title, description } = Astro.props;
       <div class="max-w-5xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
-            <span class="font-display text-lg">首页</span>
+            <span class="font-display text-lg">hanhan的BLOG</span>
             <p class="font-display text-xs mt-4 text-paper/50">
               内容优先的像素复古博客
             </p>
