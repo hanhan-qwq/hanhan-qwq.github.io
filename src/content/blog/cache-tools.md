@@ -53,12 +53,14 @@ tags: ["agent"]
 - **Don't change tools or models mid-conversation**
 - **Monitor your cache hit rate like you monitor uptime**
 - **Fork operations need to share the parent's prefix**
+
 翻译一下大概就是：
 - 静态在前，动态在后，最大化前缀复用
 - 用消息传递更新，不修改系统提示词
 - 不在会话中途切换模型或增删工具
 - 监控缓存命中率，把这个当件重要的事做
 - 子会话需要共享父会话前缀
+
 Prompt caching 不是一个性能优化手段，它是整个系统的架构约束。提示词布局、工具管理、模型选择、会话生命周期——所有这些设计决策都围绕一个目标：让前缀不变
 
 ## 回到一开始的问题
