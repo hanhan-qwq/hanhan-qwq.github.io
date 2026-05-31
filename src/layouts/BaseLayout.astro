@@ -55,16 +55,6 @@ const { title, description } = Astro.props;
                 </li>
               ))
             }
-            <!-- Theme toggle -->
-            <li>
-              <button
-                id="theme-toggle"
-                class="pixel-chip h-9 px-3 flex items-center justify-center text-xs sm:text-sm whitespace-nowrap"
-                aria-label="Toggle dark mode"
-              >
-                🌙
-              </button>
-            </li>
           </ul>
         </nav>
       </div>
@@ -83,24 +73,5 @@ const { title, description } = Astro.props;
         </div>
       </div>
     </footer>
-
-    <script>
-      // Theme toggle
-      const toggle = document.getElementById("theme-toggle");
-      if (toggle) {
-        const isDark = localStorage.getItem("theme") === "dark" ||
-          (!localStorage.getItem("theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
-        if (isDark) {
-          document.documentElement.classList.add("dark");
-          toggle.textContent = "☀️";
-        }
-        toggle.addEventListener("click", () => {
-          document.documentElement.classList.toggle("dark");
-          const nowDark = document.documentElement.classList.contains("dark");
-          localStorage.setItem("theme", nowDark ? "dark" : "light");
-          toggle.textContent = nowDark ? "☀️" : "🌙";
-        });
-      }
-    </script>
   </body>
 </html>

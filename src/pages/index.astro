@@ -4,7 +4,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import BlogCard from "../components/BlogCard.astro";
 
-const posts = await getCollection("blog");
+const posts = (await getCollection("blog"))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
 
 ---
 
