@@ -87,7 +87,7 @@
   }
 
   .wave-link {
-    @apply hover:underline hover:decoration-wavy underline-offset-4 decoration-2;
+    @apply hover:underline hover:decoration-dashed underline-offset-4 decoration-2;
   }
 
   .prose-body {
